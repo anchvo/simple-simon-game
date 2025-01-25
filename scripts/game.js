@@ -7,6 +7,8 @@ let game = {
 
 function newGame() {
     game.score = 0;
+    game.currentGame = [];
+    game.playerMoves = [];
 }
 
 // Export function so require statement in test file works
