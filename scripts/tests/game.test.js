@@ -23,6 +23,8 @@ beforeAll(() => {
 });
 
 // Tests
+
+// Tests if game object has correct key and sets up starting game data correctly
 describe("game object contains correct keys", () => {
     test("score key exists", () => {
         expect("score" in game).toBe(true);
@@ -41,6 +43,7 @@ describe("game object contains correct keys", () => {
     });
 });
 
+// Tests if newGame function works correctly and resets what it should
 describe("newGame works correctly", () => {
     beforeAll(() => {
         // Mock data to check if tested functions clear it

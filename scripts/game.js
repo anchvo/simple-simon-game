@@ -1,3 +1,4 @@
+// Game object that sets up game data
 let game = {
     score: 0, 
     currentGame: [],
@@ -5,6 +6,7 @@ let game = {
     choices: ["button1", "button2", "button3", "button4"],
 }
 
+// New game function that resets progess
 function newGame() {
     game.score = 0;
     game.currentGame = [];
@@ -12,6 +14,7 @@ function newGame() {
     showScore();
 }
 
+// Show score function that displays current score count in respective element
 function showScore() {
     document.getElementById("score").innerText = game.score;
 }
