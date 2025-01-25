@@ -4,10 +4,14 @@
 
 // Imports functions from game.js file
 const {
+    expect
+} = require("@jest/globals");
+const {
     game,
     newGame,
     showScore,
-    addTurn
+    addTurn,
+    lightsOn
 } = require("../game");
 
 // Runs before each test is run
@@ -70,7 +74,8 @@ describe("newGame works correctly", () => {
     });
 });
 
-
+// Tests if all gameplay functions work as expected, 
+// if addTurn adds a turn and lightsOn adds class to buttons
 describe("gameplay works correctly", () => {
     beforeEach(() => {
         // Sets state before each test
@@ -90,5 +95,9 @@ describe("gameplay works correctly", () => {
         expect(game.score).toEqual(0);
         expect(game.currentGame.length).toBe(2);
     });
+    test("should add correct class to light up the button", () => {
+        let button = document.getElementById(game.currentGame[0]);
+        lightsOn(game.currentGame[0]);
+        expect(button.classList).toContain("light");
+    });
 });
-
