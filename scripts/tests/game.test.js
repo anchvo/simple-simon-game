@@ -5,7 +5,9 @@
 // Imports functions from game.js file
 const {
     game,
-    newGame, showScore
+    newGame,
+    showScore,
+    addTurn
 } = require("../game");
 
 // Runs before each test is run
@@ -59,8 +61,8 @@ describe("newGame works correctly", () => {
     test("should clear the player moves array", () => {
         expect(game.playerMoves.length).toEqual(0);
     });
-    test("should clear the computer sequence array", () => {
-        expect(game.currentGame.length).toEqual(0);
+    test("should add one move to the computer's game array", () => {
+        expect(game.currentGame.length).toBe(1);
     });
     test("should display 0 for the element with id of score", () => {
         expect(document.getElementById("score").innerText).toEqual(0);
