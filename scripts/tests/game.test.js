@@ -45,10 +45,11 @@ describe("game object contains correct keys", () => {
     });
 });
 
-// Tests if newGame function works correctly and resets what it should
+// Tests if newGame function works correctly and resets what it should, 
+// also tests if connected functions showScore and addTurn work as expected
 describe("newGame works correctly", () => {
     beforeAll(() => {
-        // Mock data to check if tested functions clear it
+        // Sets state before all tests
         game.score = 42;
         game.playerMoves = ["button1", "button2"];
         game.currentGame = ["button1", "button2"];
@@ -68,3 +69,26 @@ describe("newGame works correctly", () => {
         expect(document.getElementById("score").innerText).toEqual(0);
     });
 });
+
+
+describe("gameplay works correctly", () => {
+    beforeEach(() => {
+        // Sets state before each test
+        game.score = 0;
+        game.playerMoves = [];
+        game.currentGame = [];
+        addTurn();
+    });
+    // Resets state after each test
+    afterEach(() => {
+        game.score = 0;
+        game.playerMoves = [];
+        game.currentGame = [];
+    });
+    test("addTurn adds a new turn to the game", () => {
+        addTurn();
+        expect(game.score).toEqual(0);
+        expect(game.currentGame.length).toBe(2);
+    });
+});
+
