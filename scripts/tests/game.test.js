@@ -54,7 +54,8 @@ describe("game object contains correct keys", () => {
 });
 
 // Tests if newGame function works correctly and resets what it should, 
-// also tests if connected functions showScore and addTurn work as expected
+// also tests if connected functions showScore and addTurn work as expected, 
+// and if data-listener attribute from html code is set to true 
 describe("newGame works correctly", () => {
     beforeAll(() => {
         // Sets state before all tests
@@ -75,6 +76,13 @@ describe("newGame works correctly", () => {
     });
     test("should display 0 for the element with id of score", () => {
         expect(document.getElementById("score").innerText).toEqual(0);
+    });
+    test("expect data-listener to be true", () => {
+        newGame();
+        const elements = document.getElementsByClassName("circle");
+        for (let element of elements) {
+            expect(element.getAttribute("data-listener")).toEqual("true");
+        }
     });
 });
 

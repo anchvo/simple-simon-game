@@ -7,11 +7,25 @@ let game = {
     choices: ["button1", "button2", "button3", "button4"],
 }
 
-// New game function that resets progess
+// New game function that resets progess, 
+// changes data-listener attribute in html code to true according to user input / button click
 function newGame() {
     game.score = 0;
     game.currentGame = [];
     game.playerMoves = [];
+
+    for (let circle of document.getElementsByClassName("circle")) {
+        if (circle.getAttribute("data-listener") !== "true") {
+            circle.addEventListener("click", (e) => {
+                let move = e.target.getAttribute("id");
+                lightsOn(move);
+                game.playerMoves.push(move);
+                playerTurn();
+            });
+            circle.setAttribute("data-listener", "true");
+        }
+    }
+
     showScore();
     addTurn();
 }
