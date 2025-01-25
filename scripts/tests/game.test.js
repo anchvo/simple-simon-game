@@ -12,7 +12,8 @@ const {
     showScore,
     addTurn,
     lightsOn,
-    showTurns
+    showTurns, 
+    playerTurn
 } = require("../game");
 
 // Runs before each test is run
@@ -88,7 +89,8 @@ describe("newGame works correctly", () => {
 
 // Tests if all gameplay functions work as expected, 
 // if addTurn adds a turn and lightsOn adds class to buttons,
-// if showTurns rests game turn number
+// if showTurns rests game turn number, 
+// if score is set correctly depending on correct / incorrect input
 describe("gameplay works correctly", () => {
     beforeEach(() => {
         // Sets state before each test
@@ -117,5 +119,10 @@ describe("gameplay works correctly", () => {
         game.turnNumber = 42;
         showTurns();
         expect(game.turnNumber).toBe(0);
+    });
+    test("should increment the score if the turn is correct", () => {
+        game.playerMoves.push(game.currentGame[0]);
+        playerTurn();
+        expect(game.score).toBe(1);
     });
 });

@@ -66,6 +66,23 @@ function showTurns() {
     }, 800);
 }
 
+// Player turn functions that checks if player input is correct or incorrect, 
+// incrementing the score if correct 
+// and calling newGame function if incorrect
+function playerTurn() {
+    let i = game.playerMoves.length - 1;
+    if (game.currentGame[i] === game.playerMoves[i]) {
+        if (game.currentGame.length === game.playerMoves.length) {
+            game.score++;
+            showScore();
+            addTurn();
+        }
+    } // else {
+      //  alert("Wrong move!");
+      //  newGame();
+    //}
+}
+
 // Export function so require statement in test file works
 // Functions in object because multiple functions will be exported
 module.exports = {
@@ -74,5 +91,6 @@ module.exports = {
     showScore,
     addTurn,
     lightsOn,
-    showTurns
+    showTurns,
+    playerTurn
 };
