@@ -16,6 +16,9 @@ const {
     playerTurn
 } = require("../game");
 
+// Jest spy method to report if an alert is displayed
+jest.spyOn(window, "alert").mockImplementation(() => { });
+
 // Runs before each test is run
 // Creates mock DOM
 beforeAll(() => {
