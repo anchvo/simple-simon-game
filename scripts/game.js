@@ -8,7 +8,8 @@ let game = {
 }
 
 // New game function that resets progess, 
-// changes data-listener attribute in html code to true according to user input / button click
+// changes data-listener attribute in html code to true according to user input / button click,
+// prevents button click while computer is making a turn
 function newGame() {
     game.score = 0;
     game.currentGame = [];
@@ -17,10 +18,13 @@ function newGame() {
     for (let circle of document.getElementsByClassName("circle")) {
         if (circle.getAttribute("data-listener") !== "true") {
             circle.addEventListener("click", (e) => {
-                let move = e.target.getAttribute("id");
-                lightsOn(move);
-                game.playerMoves.push(move);
-                playerTurn();
+                if (game.currentGame.length > 0 && !game.turnInProgress) {
+                    let move = e.target.getAttribute("id");
+                    game.lastButton = move;
+                    game.playerMoves.push(move);
+                    lightsOn(move);
+                    playerTurn();
+                }
             });
             circle.setAttribute("data-listener", "true");
         }
@@ -35,7 +39,7 @@ function showScore() {
     document.getElementById("score").innerText = game.score;
 }
 
-// Add turn function that generates a random game turn 
+// Add turn function that generates a random game turn to game sequence
 // i.e. circle to click for the player
 function addTurn() {
     game.playerMoves = [];
@@ -56,12 +60,14 @@ function lightsOn(circ) {
 // Show turns function that sets interval to turn on lightsOn and off, 
 // incrementing the game turnNumber during the interval
 function showTurns() {
+    game.turnInProgress = true;
     game.turnNumber = 0;
-    let turns = setInterval(() => {
+    let turns = setInterval(function () {
         lightsOn(game.currentGame[game.turnNumber]);
         game.turnNumber++;
         if (game.turnNumber >= game.currentGame.length) {
             clearInterval(turns);
+            game.turnInProgress = false;
         }
     }, 800);
 }
