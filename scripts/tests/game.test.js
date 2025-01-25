@@ -11,7 +11,8 @@ const {
     newGame,
     showScore,
     addTurn,
-    lightsOn
+    lightsOn,
+    showTurns
 } = require("../game");
 
 // Runs before each test is run
@@ -75,7 +76,8 @@ describe("newGame works correctly", () => {
 });
 
 // Tests if all gameplay functions work as expected, 
-// if addTurn adds a turn and lightsOn adds class to buttons
+// if addTurn adds a turn and lightsOn adds class to buttons,
+// if showTurns rests game turn number
 describe("gameplay works correctly", () => {
     beforeEach(() => {
         // Sets state before each test
@@ -99,5 +101,10 @@ describe("gameplay works correctly", () => {
         let button = document.getElementById(game.currentGame[0]);
         lightsOn(game.currentGame[0]);
         expect(button.classList).toContain("light");
+    });
+    test("showTurns should update game.turnNumber", () => {
+        game.turnNumber = 42;
+        showTurns();
+        expect(game.turnNumber).toBe(0);
     });
 });

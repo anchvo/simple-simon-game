@@ -27,15 +27,28 @@ function addTurn() {
     // Pushes onto the compute game sequence containing game choices and buttons ids, 
     // generates a random number between zero and three
     game.currentGame.push(game.choices[(Math.floor(Math.random() * 4))]);
-    // showTurns();
+    showTurns();
 }
 
-// Lights on function that changes colour of buttons for 400ms
+// Lights on function that lights up buttons for 400ms
 function lightsOn(circ) {
     document.getElementById(circ).classList.add("light");
     setTimeout(() => {
         document.getElementById(circ).classList.remove("light");
     }, 400);
+}
+
+// Show turns function that sets interval to turn on lightsOn and off, 
+// incrementing the game turnNumber during the interval
+function showTurns() {
+    game.turnNumber = 0;
+    let turns = setInterval(() => {
+        lightsOn(game.currentGame[game.turnNumber]);
+        game.turnNumber++;
+        if (game.turnNumber >= game.currentGame.length) {
+            clearInterval(turns);
+        }
+    }, 800);
 }
 
 // Export function so require statement in test file works
@@ -45,5 +58,6 @@ module.exports = {
     newGame,
     showScore,
     addTurn,
-    lightsOn
+    lightsOn,
+    showTurns
 };
