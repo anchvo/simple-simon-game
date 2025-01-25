@@ -2,6 +2,9 @@
  * @jest-environment jsdom
  */
 
+// Imports functions from game.js file
+const { game } = require("../game");
+
 // Runs before each test is run
 // Creates mock DOM
 beforeAll(() => {
