@@ -77,10 +77,10 @@ function playerTurn() {
             showScore();
             addTurn();
         }
-    } // else {
-      //  alert("Wrong move!");
-      //  newGame();
-    //}
+    } else {
+        alert("Wrong move!");
+        newGame();
+    }
 }
 
 // Export function so require statement in test file works
