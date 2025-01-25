@@ -5,6 +5,10 @@ let game = {
     choices: ["button1", "button2", "button3", "button4"],
 }
 
+function newGame() {
+    game.score = 0;
+}
+
 // Export function so require statement in test file works
 // Functions in object because multiple functions will be exported
-module.exports = { game };
+module.exports = { game, newGame };
